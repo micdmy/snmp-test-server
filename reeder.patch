@@ -1,0 +1,38 @@
+diff --git a/snmplib/keytools.c b/snmplib/keytools.c
+index 129a7c0557..2377dfa82f 100644
+--- a/snmplib/keytools.c
++++ b/snmplib/keytools.c
+@@ -4,7 +4,7 @@
+  */
+ /*
+  * Portions of this file are copyrighted by:
+- * Copyright © 2003 Sun Microsystems, Inc. All rights reserved.
++ * Copyright ï¿½ 2003 Sun Microsystems, Inc. All rights reserved.
+  * Use is subject to license terms specified in the COPYING file
+  * distributed with the Net-SNMP package.
+  *
+@@ -565,7 +565,6 @@ _kul_extend_blumenthal(int needKeyLen, oid *hashoid, u_int hashoid_len,
+  *      SNMPERR_SUCCESS      Success.
+  *      SNMPERR_GENERR       All errors.
+  */
+-#if defined(NETSNMP_DRAFT_REEDER_3DES) || defined(NETSNMP_DRAFT_BLUMENTHAL_AES_04)
+ static int
+ _kul_extend_reeder(int needKeyLen, oid *hashoid, u_int hashoid_len,
+                    u_char *engineID, int engineIDLen,
+@@ -620,7 +619,6 @@ _kul_extend_reeder(int needKeyLen, oid *hashoid, u_int hashoid_len,
+                 saveLen, *origKulLen));
+     return SNMPERR_SUCCESS;
+ }
+-#endif /* NETSNMP_DRAFT_REEDER_3DES || NETSNMP_DRAFT_BLUMENTHAL_AES_04 */
+ 
+ /*******************************************************************-o-******
+  * netsnmp_extend_key
+@@ -713,7 +711,7 @@ netsnmp_extend_kul(u_int needKeyLen, oid *hashoid, u_int hashoid_len,
+         case USM_CREATE_USER_PRIV_AES192:
+         case USM_CREATE_USER_PRIV_AES256:
+         {
+-            int reeder = privType & USM_AES_REEDER_FLAG;
++            int reeder = 1;
+             if (reeder)
+                 ret = _kul_extend_reeder(needKeyLen, hashoid, hashoid_len,
+                                          engineID, engineIDLen,
